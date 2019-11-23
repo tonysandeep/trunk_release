@@ -12,7 +12,8 @@ pipeline {
                 echo 'Clean Build'
                     sh "ls"
                     sh "pwd"
-                    sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=testproj1_rakesh -Dsonar.organization=rakesh635-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b6011a743e95e30948765c87a16ee9b8cac28712"  
+                    //sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=testproj1_rakesh -Dsonar.organization=rakesh635-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b6011a743e95e30948765c87a16ee9b8cac28712"  
+                    sh 'mvn clean compile'
             }
         }
         stage('Package') {
