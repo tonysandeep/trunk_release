@@ -19,7 +19,7 @@ public class JDBCExample2 {
 
         // auto close connection and preparedStatement
         try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://127.0.0.1:3306/test", "root", "password");
+                "jdbc:mysql://35.200.212.88:3306/test", "root", "password");
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
