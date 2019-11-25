@@ -10,6 +10,20 @@
 </head>
 <body>
 	<div align="center">
+		<div style="width:960px;height:100px;">
+			<div style="width:960px;height:100px;">
+				<div id="logo" style="float:left">
+				    <img src="https://www.strunkmedia.com/wp-content/uploads/2018/05/bigstock-Print-163213010.png" style="height:100px">
+				</div>
+				<div id="logo" style="float:right">
+				    <div style="text-align:right">SIGNIN / SIGNUP</div>
+			    <br>
+			    <br><br><br>
+
+			    HOME | ABOUT US | CAREER | SEARCH : <input type="text" value="SEARCH">
+			</div>
+		</div>
+		<br>
 		<h1>Employee List</h1>
 		
 		<table border="1">
