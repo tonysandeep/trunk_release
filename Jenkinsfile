@@ -13,14 +13,15 @@ pipeline {
                     sh "ls"
                     sh "pwd"
                     //sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=testproj1_rakesh -Dsonar.organization=rakesh635-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b6011a743e95e30948765c87a16ee9b8cac28712"  
-                    sh "mvn test sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=employee_jdbc -Dsonar.host.url=http://35.244.62.220/ -Dsonar.login=aac7cc7809ddc82ce0070e3f74726c71216936b6"
+                    sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=employee_jdbc -Dsonar.host.url=http://35.244.62.220/ -Dsonar.login=aac7cc7809ddc82ce0070e3f74726c71216936b6"
                     //sh 'mvn clean compile'
             }
         }
         stage('Package') {
             steps {
                 echo 'Packaging'
-                sh 'mvn package -DskipTests'
+                //sh 'mvn package -DskipTests'
+                sh 'mvn package'
             }
         }
         stage("publish to nexus") {
