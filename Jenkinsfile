@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Packaging'
                 //sh 'mvn package -DskipTests'
-                sh 'mvn package'
+                sh 'mvn package -DskipTests'
             }
         }
         stage("publish to nexus") {
@@ -77,7 +77,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing - Dummy Stage'
-                //sh 'mvn test'
+                sh 'mvn test'
             }
         }
         stage('Artifact Promotion') {
