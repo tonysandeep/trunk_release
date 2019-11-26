@@ -80,7 +80,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Artifact Promotion') {
+        /*stage('Artifact Promotion') {
             steps {
                 artifactPromotion (
                     promoterClass: 'org.jenkinsci.plugins.artifactpromotion.NexusOSSPromotor',
@@ -99,7 +99,7 @@ pipeline {
                     releasePW: 'admin123'
                 )
             }
-        }
+        }*/
     }
     tools {
         maven 'maven3.3.9'
