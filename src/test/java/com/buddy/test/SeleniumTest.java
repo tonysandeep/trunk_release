@@ -27,7 +27,7 @@ public class SeleniumTest {
 
     @Test
     public void test1() throws Exception {
-    	driver.get("http://35.200.184.59:8081/employee/");
+    	driver.get("http://35.200.184.59:8081/test/");
         assertEquals("Employee Management Screen", driver.getTitle());
     }
 
@@ -35,7 +35,7 @@ public class SeleniumTest {
 	@Ignore
     @Test
     public void test2() throws Exception {
-    	driver.get("http://35.200.184.59:8081/employee/");
+    	driver.get("http://35.200.184.59:8081/test/");
         assertEquals("Employee Management Screen", driver.getTitle());
     }
 
