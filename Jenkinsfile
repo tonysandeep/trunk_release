@@ -68,7 +68,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'curl --upload-file target/SpringMVCHibernateCRUD.war "http://tomcat:password@35.200.184.59:8081/manager/text/deploy?path=/employee&update=true"'
+                sh 'curl --upload-file target/SpringMVCHibernateCRUD.war "http://tomcat:password@35.200.184.59:8081/manager/text/deploy?path=/hello1&update=true"'
                 //withCredentials([usernamePassword(credentialsId: 'nexusadmin', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 //    sh 'curl --upload-file target/hello-world-war-1.0.0-SNAPSHOT.war "http://${user}:${pass}@34.93.240.217:8082/manager/text/deploy?path=/hello&update=true"'
                 //}
