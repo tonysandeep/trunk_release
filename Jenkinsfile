@@ -13,7 +13,7 @@ pipeline {
                     sh "ls"
                     sh "pwd"
                     //sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=testproj1_rakesh -Dsonar.organization=rakesh635-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b6011a743e95e30948765c87a16ee9b8cac28712"  
-                    sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=employee_jdbc -Dsonar.host.url=http://35.244.62.220/ -Dsonar.login=aac7cc7809ddc82ce0070e3f74726c71216936b6"
+                    sh "mvn sonar:sonar clean compile -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=employee_jdbc -Dsonar.host.url=http://10.62.125.4:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"
                     //sh 'mvn clean compile'
             }
         }
@@ -68,7 +68,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'curl --upload-file target/SpringMVCHibernateCRUD.war "http://tomcat:password@35.200.184.59:8081/manager/text/deploy?path=/test&update=true"'
+                sh 'curl --upload-file target/SpringMVCHibernateCRUD.war "http://tomcat:password@10.62.125.4:8083/manager/text/deploy?path=/test&update=true"'
                 //withCredentials([usernamePassword(credentialsId: 'nexusadmin', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 //    sh 'curl --upload-file target/hello-world-war-1.0.0-SNAPSHOT.war "http://${user}:${pass}@34.93.240.217:8082/manager/text/deploy?path=/hello&update=true"'
                 //}
