@@ -20,14 +20,15 @@ public class SeleniumTest {
     @Before
     public void setUp() throws MalformedURLException {
         DesiredCapabilities capability = DesiredCapabilities.chrome();
-        driver = new RemoteWebDriver(new URL("http://10.62.125.4:4444/wd/hub"), capability);
+        //driver = new RemoteWebDriver(new URL("http://10.62.125.4:4444/wd/hub"), capability);
+	driver = new RemoteWebDriver(new URL("http://34.93.123.206:4444/wd/hub"), capability);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @Test
     public void test1() throws Exception {
-    	driver.get("http://10.62.125.4:8083/curd/");
+    	driver.get("http://34.93.44.123:8081/curd/");
         assertEquals("Employee Management Screen", driver.getTitle());
     }
 
@@ -35,7 +36,7 @@ public class SeleniumTest {
 	@Ignore
     @Test
     public void test2() throws Exception {
-    	driver.get("http://10.62.125.4:8083/curd/");
+    	driver.get("http://34.93.44.123:8081/curd/");
         assertEquals("Employee Management Screen", driver.getTitle());
     }
 
