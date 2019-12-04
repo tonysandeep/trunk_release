@@ -97,13 +97,10 @@ pipeline {
                         if (v) {
                             echo "Building version ${v} - so released version is ${releasedVersion}"
                         }
-                        // jenkins user credentials ID which is transparent to the user and password change
-                        sshagent(['0000000-3b5a-454e-a8e6-c6b6114d36000']) {
                             sh "git tag -f v${v}"
                             sh "git push -f --tags"
-                        }
-                        sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
-                        sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true clean deploy"
+                        sh "mvn -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
+                        sh "mvn -Dmaven.test.skip=true clean deploy"
 
                     } else {
                         error "Release is not possible. as build is not successful"
