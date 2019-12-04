@@ -1,13 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('checkout') {
+        /*stage('checkout') {
             steps {
                 echo 'checkout'
-                echo 'Pulling...' + env.BRANCH_NAME
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/rakesh635/employee_jdbc.git']]])
-            }
-        }
+                echo 'Pulling...' + env.BRANCH_NAME*/
+               // checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/rakesh635/employee_jdbc.git']]])
+            /*}
+        }*/
         stage('Build') {
             steps {
                 echo 'Clean Build'
