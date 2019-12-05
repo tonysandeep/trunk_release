@@ -99,9 +99,10 @@ pipeline {
                             echo "Building version ${v} - so released version is ${releasedVersion}"
                         }
                             sh "git tag -f v${v}"
-                            sh "git push -f --tags"
-                        sh "mvn -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
-                        sh "mvn -Dmaven.test.skip=true clean deploy"
+                            //sh "git push -f --tags"
+                            sh "git push origin --tags"
+                        //sh "mvn -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
+                        //sh "mvn -Dmaven.test.skip=true clean deploy"
 
                     } else {
                         error "Release is not possible. as build is not successful"
