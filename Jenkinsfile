@@ -1,5 +1,18 @@
 pipeline {
     agent any
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'ref', value: '$.ref'],
+                [key: 'repository', regexpFilter: '[^a-z_-]', value: '$.repository']
+            ],
+            causeString: 'Triggered on $ref',
+            regexpFilterExpression: 'generic',
+            regexpFilterText: '$repository',
+            printContributedVariables: true,
+            printPostContent: true
+        )
+    }
     stages {
         /*stage('checkout') {
             steps {
