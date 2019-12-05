@@ -4,7 +4,7 @@ pipeline {
         /*stage('checkout') {
             steps {
                 echo 'checkout'
-                echo 'Pulling...' + env.BRANCH_NAME*/
+                echo 'Pulling.....' + env.BRANCH_NAME*/
                // checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/rakesh635/employee_jdbc.git']]])
             /*}
         }*/
@@ -87,7 +87,7 @@ pipeline {
         stage('Release and publish artifact') {
             when {
                 // check if branch is master
-                branch 'origin/master'
+                branch 'master'
             }
             steps {
                 // create the release version then create a tage with it , then push to nexus releases the released jar
