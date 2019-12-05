@@ -87,7 +87,7 @@ pipeline {
         stage('Release and publish artifact') {
             when {
                 // check if branch is master
-                branch 'master'
+                branch 'origin/master'
             }
             steps {
                 // create the release version then create a tage with it , then push to nexus releases the released jar
