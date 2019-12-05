@@ -99,7 +99,7 @@ pipeline {
                             echo "Building version ${v} - so released version is ${releasedVersion}"
                         }
                         withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh("git tag -a some_tag -m 'Jenkins'")
+                        sh("git tag -a v${v} -m 'Jenkins'")
                         sh "git config --list"
                         sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/rakesh635/employee_jdbc.git --tags')
                         }
