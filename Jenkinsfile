@@ -100,7 +100,8 @@ pipeline {
                         }
                         withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh("git tag -a some_tag -m 'Jenkins'")
-                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/rakesh635/employee_jdbc.git origin --tags')
+                        sh "git config --list"
+                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/rakesh635/employee_jdbc.git --tags')
                         }
                             //sh "git tag -f v${v}"
                             //sh "git config --list"
