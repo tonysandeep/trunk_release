@@ -98,10 +98,10 @@ pipeline {
                         if (v) {
                             echo "Building version ${v} - so released version is ${releasedVersion}"
                         }
-                        /*withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh("git tag -a some_tag -m 'Jenkins'")
-                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@<REPO> --tags')
-                        }*/
+                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com origin --tags')
+                        }
                             sh "git tag -f v${v}"
                             sh "git config --list"
                             //sh "git push -f --tags"
