@@ -28,7 +28,7 @@
 		
 		<table border="1">
 
-			<th>Name</th>
+			<th>FirstName</th>
 			<th>Email</th>
 			<th>Address</th>
 			<th>Telephone</th>
