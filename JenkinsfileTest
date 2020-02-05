@@ -6,7 +6,7 @@ pipeline {
 		stage("Unit Test") {
 					agent { label 'windows' }
 					steps {
-								cleanWs()
+								
 								echo ' Unit Test Stage'
 							
 								bat 'mvn test'
@@ -221,6 +221,7 @@ pipeline {
     post {
          always {
             echo 'JENKINS PIPELINE'
+	    cleanWs()
             
 
         }
