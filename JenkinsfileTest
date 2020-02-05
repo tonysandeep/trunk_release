@@ -1,18 +1,9 @@
 pipeline {
     agent { label 'master' }
 	//options { skipDefaultCheckout() }
-		stages {
+	stages {
 
-		stage("Unit Test") {
-					agent { label 'windows' }
-					steps {
-								
-								echo ' Unit Test Stage'
-							
-								bat 'mvn test'
-								junit 'target\\surefire-reports\\*.xml'	
-						}
-				}
+				
 	    			/*stage('Scanning for Security') {
 					 when {
 					 anyOf {
