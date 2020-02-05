@@ -2,7 +2,7 @@
 <udm.DeploymentPackage version="{{PACKAGE_VERSION}}" application="{{Deploy-App}}">
  <application />
  <deployables>
-  <jee.War name="/curd" file="/curd.war"/>
+  <jee.War name="/SpringMVCHibernateCRUD" file="/SpringMVCHibernateCRUD.war"/>
  </deployables>
  <dependencyResolution>LATEST</dependencyResolution>
  <undeployDependencies>false</undeployDependencies>
