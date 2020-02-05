@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<udm.DeploymentPackage version="{{PACKAGE_VERSION}}" application="AddressBook">
+<udm.DeploymentPackage version="{{PACKAGE_VERSION}}" application="{{Deploy-App}}">
  <application />
  <deployables>
-  <jee.War name="/addressbook" file="/addressbook.war"/>
+  <jee.War name="/curd" file="/curd.war"/>
  </deployables>
  <dependencyResolution>LATEST</dependencyResolution>
  <undeployDependencies>false</undeployDependencies>
