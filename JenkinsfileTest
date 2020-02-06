@@ -122,6 +122,12 @@ pipeline {
 								    completedStatus('FAILURE', 'There were errors, for info, please see...')
 								    completedStatus('ERROR', 'There was an error in the infrastructure, please contact...')
 								}
+								
+								publishers {
+									mergeGithubPullRequest {
+									mergeComment('merged by Jenkins')
+									
+								}
 						}
 					}
 				}				
