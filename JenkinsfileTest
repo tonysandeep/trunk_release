@@ -91,11 +91,11 @@ pipeline {
 					 }
 					steps {
 						sh "git checkout master"
-						sh "git pull upstream master && git push origin PR/4"
-						sh "git checkout PR/4"
+						sh "git pull upstream master && git push origin 'PR/4'"
+						sh "git checkout 'PR/4'"
 						sh "git rebase master"
-						//sh "git push -f origin PR/4"
-						sh "git push -u origin pr/4
+						//sh "git push -f origin 'PR/4'"
+						sh "git push -u origin pr/4"
     curl -XPOST -d '{"title":"Success $BUILD_TAG", "base":"master", "head":"pr/4}", "body":"Success $BUILD_TAG"}' \
 https://api.github.com/repos/tonysandeep/pulls"
 						}
