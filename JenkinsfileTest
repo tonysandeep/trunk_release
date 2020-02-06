@@ -98,16 +98,15 @@ pipeline {
 						//sh "git push -f origin master"
 						}
 					}
-				stage('Commenting to PR') {
+				
+				stage('Approve the PR request') {
 				 	 when {
-					 	 branch 'PR*'
-					   }
+					   	branch 'PR*'
+					 }
 					steps {
-						
-						}
-					}					
-     
-		     
+						echo "Approve"
+					}
+				}				
 
 				/* stage('Release Approval') {
 					 when {
