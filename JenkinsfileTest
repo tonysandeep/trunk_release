@@ -248,7 +248,7 @@ pipeline {
         }
         failure {
             echo 'JENKINS PIPELINE FAILED'
-	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'Failure'
+	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'FAILURE'
         }
         unstable {
             echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
