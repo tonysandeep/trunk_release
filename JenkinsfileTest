@@ -244,12 +244,15 @@ pipeline {
         }
         success {
             echo 'JENKINS PIPELINE SUCCESSFUL'
+	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'SUCCESS'
         }
         failure {
             echo 'JENKINS PIPELINE FAILED'
+	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'Failure'
         }
         unstable {
             echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
+	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'ERROR'
         }
         changed {
             echo 'JENKINS PIPELINE STATUS HAS CHANGED SINCE LAST EXECUTION'
