@@ -126,6 +126,7 @@ pipeline {
 								publishers {
 									mergeGithubPullRequest {
 									mergeComment('merged by Jenkins')
+									}
 									
 								}
 						}
