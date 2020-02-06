@@ -84,16 +84,13 @@ pipeline {
 					
 				stage('Merge the PR Locally') {
 				 	 when {
-					   anyOf { branch 'PR*' }
-					   not {
-					 		branch 'master'
-					    }
+					   	branch 'PR*'
 					 }
 					steps {
-						sh "git checkout -b pullrequest"
-						sh "git fetch origin master/head:master"
-						sh "git branch"
+						sh "git checkout -b pullrequest"						
+						sh "git fetch origin master:master"					
 						sh "git checkout master"
+						echo 'checking local merge to master'
 						sh "git merge pullrequest"
 						//sh "git pull upstream master && git push origin 'PR/4'"
 						//sh "git checkout 'PR/4'"
@@ -101,7 +98,14 @@ pipeline {
 						//sh "git push -f origin master"
 						}
 					}
-					
+				stage('Commenting to PR') {
+				 	 when {
+					 	 branch 'PR*'
+					   }
+					steps {
+						
+						}
+					}					
      
 		     
 
