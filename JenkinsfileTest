@@ -21,8 +21,9 @@ pipeline {
 								cleanWs()
 								checkout scm
 								sh "ls"
-								sh "pwd"								
-								sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CurdApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"
+								sh "pwd"
+								sh "mvn clean package -DskipTests"
+								//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CurdApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"
 								 
 						}
 				}
@@ -105,31 +106,7 @@ pipeline {
 					 }
 					steps {
 						echo "Approve"
-						 githubPullRequest { 
-						 	commitStatus {
-								    context('deploy to staging site')
-								    triggeredStatus('starting deployment to staging site...')
-								    startedStatus('deploying to staging site...')
-								    addTestResults(true)
-								    statusUrl('http://mystatussite.com/prs')
-								    completedStatus('SUCCESS', 'All is well')
-								    completedStatus('FAILURE', 'Something went wrong. Investigate!')
-								    completedStatus('PENDING', 'still in progress...')
-								    completedStatus('ERROR', 'Something went really wrong. Investigate!')
-								}
-								buildStatus {
-								    completedStatus('SUCCESS', 'There were no errors, go have a cup of coffee...')
-								    completedStatus('FAILURE', 'There were errors, for info, please see...')
-								    completedStatus('ERROR', 'There was an error in the infrastructure, please contact...')
-								}
-								
-								publishers {
-									mergeGithubPullRequest {
-									mergeComment('merged by Jenkins')
-									}
-									
-								}
-						}
+
 					}
 				}				
 
