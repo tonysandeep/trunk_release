@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<udm.DeploymentPackage version="38" application="CurdApp">
+ <application />
+ <deployables>
+  <jee.War name="/SpringMVCHibernateCRUD" file="/SpringMVCHibernateCRUD.war"/>
+ </deployables>
+ <dependencyResolution>LATEST</dependencyResolution>
+ <undeployDependencies>false</undeployDependencies>
+</udm.DeploymentPackage>
