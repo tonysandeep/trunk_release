@@ -23,7 +23,7 @@ pipeline {
 								sh "ls"
 								sh "pwd"
 								//sh "mvn clean package -DskipTests"
-								sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CurdApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"
+								sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"
 								 
 						}
 				}
@@ -154,8 +154,8 @@ pipeline {
 					sh "git commit -a -m '${releasedVersion}'"
 					sh "git checkout -b ${releasedVersion}"
 					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
-					sh "git tag -a $BUILD_NUMBER-${releasedVersion} -m 'CURD-${releasedVersion}'"
-					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
+					sh "git tag -a $BUILD_NUMBER-${releasedVersion} -m 'CRUD-${releasedVersion}'"
+					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git $BUILD_NUMBER-${releasedVersion}"
 				}
 
 			    }
@@ -194,7 +194,7 @@ pipeline {
 							def releasedVersion = getReleaseVersion()
 						
 							sh "sed -i 's/{{PACKAGE_VERSION}}/${releasedVersion}.0/g' deployit-manifest.xml"
-							sh "sed -i 's/{{Deploy-App}}/CURD-RELEASE/g' deployit-manifest.xml"
+							sh "sed -i 's/{{Deploy-App}}/CRUD-RELEASE/g' deployit-manifest.xml"
 							xldCreatePackage artifactsPath: 'release/target', manifestPath: 'release/deployit-manifest.xml', darPath: "release/${releasedVersion}.0.dar" 
 							}
 						}
