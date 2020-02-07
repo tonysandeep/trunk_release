@@ -153,9 +153,9 @@ pipeline {
 					sh 'git add -- pom.xml'
 					sh "git commit -a -m 'Release${releasedVersion}'"
 					sh "git checkout -b ${releasedVersion}"
-					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/multi-pipeline-test.git ${releasedVersion}"
+					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
 					sh "git tag -a ${releasedVersion} -m 'Addressbook-${releasedVersion}'"
-					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/multi-pipeline-test.git ${releasedVersion}"
+					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
 				}
 
 			    }
@@ -175,7 +175,7 @@ pipeline {
 						doGenerateSubmoduleConfigurations: false, 
 						extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'release']], 
 						submoduleCfg: [], 
-						userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/tonysandeep/multi-pipeline-test.git']]
+						userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/tonysandeep/trunk_release.git']]
 					])
 					dir('release'){
 						sh 'mvn clean package'
