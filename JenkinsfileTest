@@ -93,8 +93,8 @@ pipeline {
 						sh "git checkout master"
 						echo 'checking local merge to master'
 						sh "git merge pullrequest"
-						//sh "git pull upstream master && git push origin 'PR/4'"
-						//sh "git checkout 'PR/4'"
+						//sh "git pull upstream master && git push origin '${CHANGE_ID}'"
+						//sh "git checkout '${CHANGE_ID}'"
 						//sh "git rebase master"
 						//sh "git push -f origin master"
 						}
@@ -152,6 +152,8 @@ pipeline {
 					sh 'git status'
 					sh 'git add -- pom.xml'
 					sh "git commit -a -m 'Release${releasedVersion}'"
+					sh "git checkout -b ${releasedVersion}"
+					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/multi-pipeline-test.git ${releasedVersion}"
 					sh "git tag -a ${releasedVersion} -m 'Addressbook-${releasedVersion}'"
 					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/multi-pipeline-test.git ${releasedVersion}"
 				}
@@ -176,7 +178,7 @@ pipeline {
 						userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/tonysandeep/multi-pipeline-test.git']]
 					])
 					dir('release'){
-						sh 'mvn clean test install'
+						sh 'mvn clean package'
 					}	
 				}
 			    }
@@ -237,22 +239,20 @@ pipeline {
 
     post {
          always {
-            echo 'JENKINS PIPELINE'
-	    
-            
+            echo 'JENKINS PIPELINE'  
 
         }
         success {
             echo 'JENKINS PIPELINE SUCCESSFUL'
-	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'SUCCESS'
+	    githubNotify description: "$BUILD_TAG $BUILD_URL",  status: 'SUCCESS'
         }
         failure {
             echo 'JENKINS PIPELINE FAILED'
-	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'FAILURE'
+	    githubNotify description: "$BUILD_TAG $BUILD_URL",  status: 'FAILURE'
         }
         unstable {
             echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
-	    githubNotify description: "$BUILD_TAG $BRANCH_NAME $BUILD_URL",  status: 'ERROR'
+	    githubNotify description: "$BUILD_TAG $BUILD_URL",  status: 'ERROR'
         }
         changed {
             echo 'JENKINS PIPELINE STATUS HAS CHANGED SINCE LAST EXECUTION'
