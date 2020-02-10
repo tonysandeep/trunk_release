@@ -5,9 +5,10 @@ pipeline {
 				stage('Unit Test') {
 						steps {
 								echo 'Clean Build'
-              							 gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF}runstarted')
 								cleanWs()
 								checkout scm
+              							gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF}runstarted')
+								
 								sh "ls"
 								sh "pwd"
 								sh 'mvn clean'
@@ -38,19 +39,17 @@ pipeline {
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
 		//githubPRComment comment: githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), statusVerifier: allowRunOnStatus('SUCCESS')
                script { 
+	       		pullRequest.addLabel('Build BUILD SUCCESS')
 	       		pullRequest.createStatus(status: 'success',
-                         context: 'continuous-integration/jenkins/pr-merge/tests',
-                         description: 'All tests are passing',
+                         context: 'continuous-integration/jenkins/pr-head',
+                         description: '${BUILD_TAG} ${JOB_NAME',
                          targetUrl: "${env.JOB_URL}/testResults")
-	       		withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
-                      pullRequest.setCredentials('$git_user', '$git-key')
-                      pullRequest.review(user: "$git_user", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
-		       pullRequest.addLabel('Build BUILD SUCCESS')
-                }
-		}
+	       		//withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
+                      pullRequest.setCredentials('tonysandeep', 'Qwerty0420')
+                      pullRequest.review(user: "rakesh635", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
+		     setGitHubPullRequestStatus context: '', message: 'Hey YOU CAN Merge', state: 'SUCCESS'  
                 
-                setGitHubPullRequestStatus context: '', message: 'Hey YOU CAN Merge', state: 'SUCCESS'
-            
+		}            
         }
     
      failure {
