@@ -5,7 +5,7 @@ pipeline {
 				stage('Unit Test') {
 						steps {
 								echo 'Clean Build'
-               gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF}runstarted')
+              							 gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF}runstarted')
 								cleanWs()
 								checkout scm
 								sh "ls"
@@ -35,21 +35,19 @@ pipeline {
     post {
            success {
             script {
+	    	    pullRequest.addLabel('Build BUILD SUCCESS')
+                    pullRequest.createStatus(status: 'success',
+                         context: 'continuous-integration/jenkins/pr-merge/tests',
+                         description: 'All tests are passing',
+                         targetUrl: "${env.JOB_URL}/testResults")
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
-		githubPRComment comment: githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), statusVerifier: allowRunOnStatus('SUCCESS')
+		//githubPRComment comment: githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), statusVerifier: allowRunOnStatus('SUCCESS')
                 withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
                       pullRequest.setCredentials('$git_user', '$git-key')
                       pullRequest.review(user: "$git_user", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
                 }
                 
                 setGitHubPullRequestStatus context: '', message: 'Hey YOU CAN Merge', state: 'SUCCESS'
-                if (env.CHANGE_ID) {
-                    pullRequest.addLabel('Build BUILD SUCCESS')
-                    pullRequest.createStatus(status: 'success',
-                         context: 'continuous-integration/jenkins/pr-merge/tests',
-                         description: 'All tests are passing',
-                         targetUrl: "${env.JOB_URL}/testResults")
-                }
             }
         }
     
@@ -57,9 +55,9 @@ pipeline {
             script {
 	    		githubPRComment comment: githubPRMessage("Build ${BUILD_NUMBER} ${BUILD_STATUS}"), statusVerifier: allowRunOnStatus('FAILURE')
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
-                if (env.CHANGE_ID) {
+         
                     pullRequest.addLabel("$BUILD_TAG")
-                }
+                
             }
         }
     }
