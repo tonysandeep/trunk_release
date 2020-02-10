@@ -1,1 +1,64 @@
-
+pipeline {
+    agent { label 'master' }
+	options { skipDefaultCheckout() }
+	stages {
+				stage('Unit Test') {
+						steps {
+								echo 'Clean Build'
+                gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF}runstarted')
+								//cleanWs()
+								//checkout scm
+								sh "ls"
+								sh "pwd"
+								sh 'mvn clean'
+								 
+						}
+				}
+	    
+				stage('Build and Package') {
+					agent { label 'windows' }
+						steps {
+								echo 'Clean Build'
+								//cleanWs()
+								//checkout scm
+								sh "ls"
+								sh "pwd"
+								sh "mvn clean package -DskipTests"
+                githubPRComment comment: githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), errorHandler: statusOnPublisherError('FAILURE')
+								//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"
+								 
+						}
+				}
+        
+    }
+    
+    post {
+           success {
+            script {
+                // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+                withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
+                      pullRequest.setCredentials('$git_user', '$git-key')
+                      pullRequest.review(user: "$git_user", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
+                }
+                
+                setGitHubPullRequestStatus context: '', message: 'Hey YOU CAN Merge', state: 'SUCCESS'
+                if (env.CHANGE_ID) {
+                    pullRequest.addLabel('Build BUILD SUCCESS')
+                    pullRequest.createStatus(status: 'success',
+                         context: 'continuous-integration/jenkins/pr-merge/tests',
+                         description: 'All tests are passing',
+                         targetUrl: "${env.JOB_URL}/testResults")
+                }
+            }
+        }
+    
+     failure {
+            script {
+                // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+                if (env.CHANGE_ID) {
+                    pullRequest.addLabel("$BUILD_TAG")
+                }
+            }
+        }
+    }
+} 
