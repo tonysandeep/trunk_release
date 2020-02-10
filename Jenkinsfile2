@@ -44,7 +44,7 @@ pipeline {
                          context: 'Jenkins',
                          description: "${BUILD_TAG} ${JOB_NAME}",
                          targetUrl: "${env.JOB_URL}/testResults")
-			 gitHubPRStatus githubPRMessage("${GITHUB_PR_COND_REF} SUCCESS ${BUILD_TAG}")
+			 gitHubPRStatus githubPRMessage(" SUCCESS ${BUILD_TAG}")
 	       		//withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
                       //pullRequest.setCredentials('tonysandeep', 'Qwerty0420')
                       //pullRequest.review(user: "tonysandeep", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
@@ -62,7 +62,7 @@ pipeline {
                          context: 'jenkins',
                          description: "Failed ${BUILD_TAG} ${JOB_NAME}",
                          targetUrl: "${env.JOB_URL}/testResults")
-         	gitHubPRStatus githubPRMessage("${GITHUB_PR_COND_REF} Failure ${BUILD_TAG}")
+         	gitHubPRStatus githubPRMessage(" Failure ${BUILD_TAG}")
                      pullRequest.addLabel("$BUILD_TAG failed") }
                 
             
