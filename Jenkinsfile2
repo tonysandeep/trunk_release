@@ -42,7 +42,7 @@ pipeline {
 	       		pullRequest.addLabel('Build BUILD SUCCESS')
 	       		pullRequest.createStatus(status: 'success',
                          context: 'continuous-integration/jenkins/pr-head',
-                         description: '${BUILD_TAG} ${JOB_NAME}',
+                         description: "${BUILD_TAG} ${JOB_NAME}",
                          targetUrl: "${env.JOB_URL}/testResults")
 	       		//withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
                       //pullRequest.setCredentials('tonysandeep', 'Qwerty0420')
@@ -58,7 +58,7 @@ pipeline {
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
 		pullRequest.createStatus(status: 'failure',
                          context: 'continuous-integration/jenkins/pr-head',
-                         description: '${BUILD_TAG} ${JOB_NAME}',
+                         description: "Failed ${BUILD_TAG} ${JOB_NAME}",
                          targetUrl: "${env.JOB_URL}/testResults")
          		
                      pullRequest.addLabel("$BUILD_TAG failed") }
