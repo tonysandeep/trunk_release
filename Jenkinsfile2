@@ -45,8 +45,8 @@ pipeline {
                          description: '${BUILD_TAG} ${JOB_NAME',
                          targetUrl: "${env.JOB_URL}/testResults")
 	       		//withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
-                      pullRequest.setCredentials('tonysandeep', 'Qwerty0420')
-                      pullRequest.review(user: "rakesh635", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
+                      //pullRequest.setCredentials('tonysandeep', 'Qwerty0420')
+                      //pullRequest.review(user: "tonysandeep", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
 		     setGitHubPullRequestStatus context: '', message: 'Hey YOU CAN Merge', state: 'SUCCESS'  
                 
 		}            
@@ -57,7 +57,7 @@ pipeline {
 	    	githubPRComment comment: githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), errorHandler: statusOnPublisherError('FAILURE'), statusVerifier: allowRunOnStatus('FAILURE')
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
          		
-                    script { pullRequest.addLabel("$BUILD_TAG") }
+                    script { pullRequest.addLabel("$BUILD_TAG failed") }
                 
             
         }
