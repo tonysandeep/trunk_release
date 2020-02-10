@@ -41,14 +41,14 @@ pipeline {
                script { 
 	       		pullRequest.addLabel('Build BUILD SUCCESS')
 	       		pullRequest.createStatus(status: 'success',
-                         context: 'continuous-integration/jenkins/pr-head',
+                         context: 'Jenkins',
                          description: "${BUILD_TAG} ${JOB_NAME}",
                          targetUrl: "${env.JOB_URL}/testResults")
-			 gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF} SUCCESS ${BUILD_TAG}')
+			 gitHubPRStatus githubPRMessage("${GITHUB_PR_COND_REF} SUCCESS ${BUILD_TAG}")
 	       		//withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'git-key', usernameVariable: 'git_user')]) {
                       //pullRequest.setCredentials('tonysandeep', 'Qwerty0420')
                       //pullRequest.review(user: "tonysandeep", body: "APPROVED FROM $JOB_NAME", state: "One of APPROVED")
-		     //setGitHubPullRequestStatus context: '', message: 'Hey YOU CAN Merge', state: 'SUCCESS'  
+		     setGitHubPullRequestStatus context: 'BUILDER', message: 'Hey YOU CAN Merge', state: 'SUCCESS'  
                 
 		}            
         }
@@ -59,10 +59,10 @@ pipeline {
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
 		
 		pullRequest.createStatus(status: 'failure',
-                         context: 'continuous-integration/jenkins/pr-head',
+                         context: 'jenkins',
                          description: "Failed ${BUILD_TAG} ${JOB_NAME}",
                          targetUrl: "${env.JOB_URL}/testResults")
-         	gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF} Failure ${BUILD_TAG}')
+         	gitHubPRStatus githubPRMessage("${GITHUB_PR_COND_REF} Failure ${BUILD_TAG}")
                      pullRequest.addLabel("$BUILD_TAG failed") }
                 
             
