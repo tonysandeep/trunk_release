@@ -53,7 +53,7 @@ pipeline {
         }
     
      failure {
-            
+            	script {
 	    	//githubPRComment comment: githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), errorHandler: statusOnPublisherError('FAILURE'), statusVerifier: allowRunOnStatus('FAILURE')
                 // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
 		pullRequest.createStatus(status: 'failure',
@@ -61,7 +61,7 @@ pipeline {
                          description: '${BUILD_TAG} ${JOB_NAME}',
                          targetUrl: "${env.JOB_URL}/testResults")
          		
-                    script { pullRequest.addLabel("$BUILD_TAG failed") }
+                     pullRequest.addLabel("$BUILD_TAG failed") }
                 
             
         }
