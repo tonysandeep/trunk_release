@@ -15,7 +15,7 @@ pipeline {
 				}
 	    
 				stage('Build and Package') {
-					agent { label 'windows' }
+					/* agent { label 'windows' } */
 						steps {
 								echo 'Clean Build'
 								cleanWs()
