@@ -176,12 +176,14 @@ pipeline {
 				script {
 					def releasedVersion = getReleaseVersion()
 					sh 'git status'
-					sh 'git add -- pom.xml'
-					sh "git commit -a -m '${releasedVersion}'"
-					sh "git checkout -b ${releasedVersion}"
+					//comment done to create the release branch in repo
+					/*sh 'git add -- pom.xml'
+					sh "git commit -a -m 'Release-${releasedVersion}'"
+					sh "git checkout -b Release-${releasedVersion}"
+					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git Release-${releasedVersion}"
+					*/
+					sh "git tag -a ${releasedVersion} -m 'CRUD-${releasedVersion}'"
 					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
-					sh "git tag -a $BUILD_NUMBER-${releasedVersion} -m 'CRUD-${releasedVersion}'"
-					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git $BUILD_NUMBER-${releasedVersion}"
 				}
 			}
 		}
