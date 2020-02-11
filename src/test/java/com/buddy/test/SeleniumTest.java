@@ -1,4 +1,4 @@
-package works.buddy.test;
+/*package works.buddy.test;
 
 import org.junit.Before;
 import org.junit.After;
@@ -48,3 +48,5 @@ public class SeleniumTest {
     }
 
 }
+
+*/
