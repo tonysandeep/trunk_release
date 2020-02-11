@@ -106,6 +106,7 @@ pipeline {
 					 }
 					steps {
 						echo "Approve"
+						sh "curl --user sangeethak92:4aecd275521fe519115ce2c9ed51c4a418a977b4 --data '{\"body\":\"This PR build is success\",\"event\":\"APPROVE\"}'  --header Content-Type:application/json  --request POST https://api.github.com/repos/tonysandeep/trunk_release/pulls/${CHANGE_ID}/reviews"
 
 					}
 				}				
